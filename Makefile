@@ -6,14 +6,17 @@ LD_FLAGS 	:= -lncurses -L. -lizobata
 
 VPATH 		:= src:examples
 
+OBJECTS_DIR := objects/
+
 LIB_FILE 	:= lib$(PROJECT_NAME).a
 LIB_SRC_FILES 	:= $(shell ls -I "*.h" src)
-LIB_OBJECTS 	:= $(LIB_SRC_FILES:.c=.o)
+LIB_OBJECTS 	:= $(addprefix $(OBJECTS_DIR), $(LIB_SRC_FILES:.c=.o))
 
 EXAMPLES_BIN_DIR 	:= bin/
 EXAMPLES_SRC_FILES 	:= $(shell ls -I "*.h" examples)
 EXAMPLES_OBJECTS  	:= $(EXAMPLES_SRC_FILES:.c=.o)
 EXAMPLES_BINARIES 	:= $(addprefix $(EXAMPLES_BIN_DIR), $(EXAMPLES_OBJECTS:.o=))
+EXAMPLES_OBJECTS  	:= $(addprefix $(OBJECTS_DIR), $(EXAMPLES_OBJECTS))
 
 all: library examples
 
@@ -29,13 +32,13 @@ $(EXAMPLES_BINARIES): $(EXAMPLES_OBJECTS)
 library: $(LIB_OBJECTS)
 	ar -cvq $(LIB_FILE) $(LIB_OBJECTS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< $(LD_FLAGS)
+$(OBJECTS_DIR)%.o: %.c
+	mkdir -p objects
+	$(CC) $(CFLAGS) -o $@ -c $< $(LD_FLAGS)
 
 clean:
-	rm -f $(LIB_OBJECTS)
-	rm -f $(EXAMPLES_OBJECTS)
 	rm -rf $(EXAMPLES_BIN_DIR)
+	rm -rf $(OBJECTS_DIR)
 
 fullclean: clean
 	rm -f $(LIB_FILE)
