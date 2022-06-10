@@ -134,3 +134,15 @@ void draw_polygon(Polygon *pgn)
         add_point(pgn->points[i]);
     }
 }
+
+void draw_polygon_sides(Polygon *pgn)
+{
+    for (int i = 0; i < pgn->len - 1; i++) {
+        Polygon *line = line_points(pgn->points[i], pgn->points[i+1]);
+        draw_polygon(line);
+    }
+    if (pgn->len > 2) {
+        Polygon *line = line_points(pgn->points[0], pgn->points[pgn->len-1]);
+        draw_polygon(line);
+    }
+}

@@ -42,6 +42,9 @@ extern Polygon *line_points(Point *a, Point *b);
 /* Add all points in the polygon to the render buffer */
 extern void draw_polygon(Polygon *pgn);
 
+/* Link all points in a polygon, line-by-line */
+extern void draw_polygon_sides(Polygon *pgn);
+
 /* Initialise ncurses */
 extern void izobata_init(void);
 /* Close ncurses */
