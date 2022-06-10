@@ -47,6 +47,8 @@ extern void draw_polygon_sides(Polygon *pgn);
 
 /* Return the set of points that are common to both polygons */
 extern Polygon *polygon_intersect(Polygon *q, Polygon *t);
+/* Return all points in both polygons */
+extern Polygon *polygon_union(Polygon *q, Polygon *t);
 
 /* Initialise ncurses */
 extern void izobata_init(void);

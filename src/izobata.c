@@ -16,6 +16,7 @@
 
 #include "izobata.h"
 #include <stdlib.h>
+#include <string.h>
 #include <ncurses.h>
 
 Point *new_point(int x, int y)
@@ -160,5 +161,23 @@ Polygon *polygon_intersect(Polygon *q, Polygon *t)
             }
         }
     }
+    return pgn;
+}
+
+/**
+ * Use memcpy, don't just iterate over everything
+ */
+Polygon *polygon_union(Polygon *q, Polygon *t)
+{
+    Polygon *pgn = new_polygon();
+    pgn->len = q->len + t->len;
+    Point **tmp = realloc(pgn->points, pgn->len * sizeof(Point *));
+    if (tmp == NULL) {
+        return pgn;
+    } else {
+        pgn->points = tmp;
+    }
+    memcpy(pgn->points, q->points, q->len * sizeof(Point *));
+    memcpy(pgn->points + q->len, t->points, t->len * sizeof(Point *));
     return pgn;
 }
