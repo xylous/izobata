@@ -1,23 +1,38 @@
+PROJECT_NAME 	:= izobata
+
 CC 			?= gcc
-CFLAGS 		= -Wall -Wextra -Wpedantic -O3
+CFLAGS 		:= -Wall -Wextra -Wpedantic -O3
+LD_FLAGS 	:= -lncurses -L. -lizobata
 
-LIB_NAME 	= izobata.o
-VPATH 		= src:
-C_SRC_FILES = $(shell ls -I "*.h" src)
-OBJECTS  	= $(C_SRC_FILES:.c=.o)
-LD_FLAGS 	= -lncurses
+VPATH 		:= src:examples
 
-all:
+LIB_FILE 	:= lib$(PROJECT_NAME).a
+LIB_SRC_FILES 	:= $(shell ls -I "*.h" src)
+LIB_OBJECTS 	:= $(LIB_SRC_FILES:.c=.o)
 
-main: examples/main.c
-	$(CC) $(CFLAGS) -c $< $(LD_FLAGS) -L. -lizobata
+EXAMPLES_BIN_DIR 	:= bin/
+EXAMPLES_SRC_FILES 	:= $(shell ls -I "*.h" examples)
+EXAMPLES_OBJECTS  	:= $(EXAMPLES_SRC_FILES:.c=.o)
+EXAMPLES_BINARIES 	:= $(addprefix $(EXAMPLES_BIN_DIR), $(EXAMPLES_OBJECTS:.o=))
 
-izobata.a: $(OBJECTS)
-	ar -cvq libizobata.a $(OBJECTS)
-	rm $(OBJECTS)
+all: library examples
+
+examples: $(EXAMPLES_BINARIES)
+
+$(EXAMPLES_BINARIES): $(EXAMPLES_OBJECTS)
+	mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $< $(LD_FLAGS)
+
+library: $(LIB_OBJECTS)
+	ar -cvq $(LIB_FILE) $(LIB_OBJECTS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< $(LD_FLAGS)
 
 clean:
-	rm -f $(BIN_NAME) $(OBJECTS)
+	rm -f $(LIB_OBJECTS)
+	rm -f $(EXAMPLES_OBJECTS)
+	rm -rf $(EXAMPLES_BIN_DIR)
+
+fullclean: clean
+	rm -f $(LIB_FILE)
