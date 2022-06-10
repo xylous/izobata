@@ -26,6 +26,12 @@ Point *new_point(int x, int y)
     return v;
 }
 
+void point_info(Point *p)
+{
+    if (p)
+        printf("(x=%d,y=%d)\n", p->x, p->y);
+}
+
 void izobata_init(void)
 {
     initscr();
