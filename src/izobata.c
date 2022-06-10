@@ -136,16 +136,21 @@ void draw_polygon(Polygon *pgn)
     }
 }
 
-void draw_polygon_sides(Polygon *pgn)
+Polygon *polygon_sides(Polygon *pgn)
 {
+    Polygon *t = new_polygon();
+    /* Unite the current side and the next one */
+    /* Note how it doesn't work for pgn->len = 1, i.e. a single point */
     for (int i = 0; i < pgn->len - 1; i++) {
         Polygon *line = line_points(pgn->points[i], pgn->points[i+1]);
-        draw_polygon(line);
+        t = polygon_union(polygon_union(t, pgn), line);
     }
+    /* Unite the first and last side */
     if (pgn->len > 2) {
         Polygon *line = line_points(pgn->points[0], pgn->points[pgn->len-1]);
-        draw_polygon(line);
+        t = polygon_union(polygon_union(t, pgn), line);
     }
+    return t;
 }
 
 /**
@@ -171,7 +176,7 @@ Polygon *polygon_union(Polygon *q, Polygon *t)
 {
     Polygon *pgn = new_polygon();
     pgn->len = q->len + t->len;
-    Point **tmp = realloc(pgn->points, pgn->len * sizeof(Point *));
+    Point **tmp = realloc(pgn->points, (pgn->len + 1) * sizeof(Point *));
     if (tmp == NULL) {
         return pgn;
     } else {

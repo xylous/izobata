@@ -43,7 +43,7 @@ extern Polygon *line_points(Point *a, Point *b);
 extern void draw_polygon(Polygon *pgn);
 
 /* Link all points in a polygon, line-by-line */
-extern void draw_polygon_sides(Polygon *pgn);
+extern Polygon *polygon_sides(Polygon *pgn);
 
 /* Return the set of points that are common to both polygons */
 extern Polygon *polygon_intersect(Polygon *q, Polygon *t);
