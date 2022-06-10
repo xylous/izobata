@@ -34,6 +34,7 @@ typedef struct Polygon {
 } Polygon;
 
 extern Polygon *new_polygon(void);
+extern void add_point_to_polygon(Polygon **pgn, Point *p);
 
 /* Initialise ncurses */
 extern void izobata_init(void);
