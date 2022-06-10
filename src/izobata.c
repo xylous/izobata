@@ -26,6 +26,14 @@ Point *new_point(int x, int y)
     return v;
 }
 
+Polygon *new_polygon(void)
+{
+    Polygon *pgn = calloc(1, sizeof(Polygon));
+    pgn->points = NULL;
+    pgn->len = 0;
+    return pgn;
+}
+
 void point_info(Point *p)
 {
     if (p)

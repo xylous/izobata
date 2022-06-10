@@ -27,6 +27,14 @@ typedef struct Point {
 
 extern Point *new_point(int x, int y);
 
+/* For simplicity: a polygon is just a set of points */
+typedef struct Polygon {
+    Point **points;
+    int len;
+} Polygon;
+
+extern Polygon *new_polygon(void);
+
 /* Initialise ncurses */
 extern void izobata_init(void);
 /* Close ncurses */
