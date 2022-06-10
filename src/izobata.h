@@ -27,4 +27,9 @@ typedef struct Point {
 
 extern Point *new_point(int x, int y);
 
+/* Initialise ncurses */
+extern void izobata_init(void);
+/* Close ncurses */
+extern void izobata_close(void);
+
 #endif

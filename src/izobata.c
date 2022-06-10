@@ -16,6 +16,7 @@
 
 #include "izobata.h"
 #include <stdlib.h>
+#include <ncurses.h>
 
 Point *new_point(int x, int y)
 {
@@ -23,4 +24,16 @@ Point *new_point(int x, int y)
     v->x = x;
     v->y = y;
     return v;
+}
+
+void izobata_init(void)
+{
+    initscr();
+    noecho();
+}
+
+void izobata_close(void)
+{
+    getch();
+    endwin();
 }
