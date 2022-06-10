@@ -17,6 +17,9 @@ EXAMPLES_BINARIES 	:= $(addprefix $(EXAMPLES_BIN_DIR), $(EXAMPLES_OBJECTS:.o=))
 
 all: library examples
 
+debug: CFLAGS += -g
+debug: all
+
 examples: $(EXAMPLES_BINARIES)
 
 $(EXAMPLES_BINARIES): $(EXAMPLES_OBJECTS)
