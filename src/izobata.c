@@ -14,9 +14,13 @@
  * izobata.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
+#include "izobata.h"
+#include <stdlib.h>
 
-void hello()
+Point *new_point(int x, int y)
 {
-    printf("Hello world!\n");
+    Point *v = calloc(1, sizeof(Point));
+    v->x = x;
+    v->y = y;
+    return v;
 }

@@ -17,6 +17,14 @@
 #ifndef IZOBATA_H
 #define IZOBATA_H
 
-extern void hello();
+/**
+ * Representation of a point at (x,y)
+ */
+typedef struct Point {
+    int x;
+    int y;
+} Point;
+
+extern Point *new_point(int x, int y);
 
 #endif
