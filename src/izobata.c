@@ -146,3 +146,19 @@ void draw_polygon_sides(Polygon *pgn)
         draw_polygon(line);
     }
 }
+
+/**
+ * Bruteforce. Not a good approach, but it works.
+ */
+Polygon *polygon_intersect(Polygon *q, Polygon *t)
+{
+    Polygon *pgn = new_polygon();
+    for (int i = 0; i < q->len; i++) {
+        for (int j = 0; j < t->len; j++) {
+            if (q->points[i] == t->points[j]) {
+                add_point_to_polygon(&pgn, q->points[i]);
+            }
+        }
+    }
+    return pgn;
+}
