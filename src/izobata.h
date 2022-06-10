@@ -39,6 +39,9 @@ extern void add_point_to_polygon(Polygon **pgn, Point *p);
 /* Get a list of points on the given line */
 extern Polygon *line_points(Point *a, Point *b);
 
+/* Add all points in the polygon to the render buffer */
+extern void draw_polygon(Polygon *pgn);
+
 /* Initialise ncurses */
 extern void izobata_init(void);
 /* Close ncurses */

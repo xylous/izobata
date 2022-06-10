@@ -127,3 +127,10 @@ Polygon *line_points(Point *a, Point *b)
 
     return line;
 }
+
+void draw_polygon(Polygon *pgn)
+{
+    for (int i = 0; i < pgn->len; i++) {
+        add_point(pgn->points[i]);
+    }
+}
