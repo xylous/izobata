@@ -32,4 +32,9 @@ extern void izobata_init(void);
 /* Close ncurses */
 extern void izobata_close(void);
 
+/* Add a point to the buffer */
+extern void add_point(Point *p);
+/* Put everything in the buffer on the screen */
+extern void output_all(void);
+
 #endif

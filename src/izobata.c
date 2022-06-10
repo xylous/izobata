@@ -37,3 +37,14 @@ void izobata_close(void)
     getch();
     endwin();
 }
+
+void add_point(Point *p)
+{
+    move(p->y, p->x);
+    printw("#");
+}
+
+void output_all(void)
+{
+    refresh();
+}
