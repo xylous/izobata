@@ -76,3 +76,54 @@ void output_all(void)
 {
     refresh();
 }
+
+/**
+ * Use the Bresenham algorithm to get all points on a line
+ *
+ * Inspiration: https://github.com/SagarGaniga/computer-graphics/
+ */
+Polygon *line_points(Point *a, Point *b)
+{
+    Polygon *line = new_polygon();
+
+    int dx = b->x - a->x;
+    int dy = b->y - a->y;
+
+    /* determine the direction we're going on the axes: positive or negative? */
+    int sx = (dx >= 0) ? 1 : (-1);
+    int sy = (dy >= 0) ? 1 : (-1);
+
+    /* Swap X and Y axes for better performance */
+    int swapped = 0;
+    if (abs(dy) > abs(dx)) {
+        int tdx = dx;
+        dx = dy;
+        dy = tdx;
+
+        swapped = 1;
+    }
+
+    int p = 2 * abs(dy) - abs(dx);
+    int x = a->x;
+    int y = a->y;
+
+    for (int i = 0; i <= abs(dx); i++) {
+        Point *point = new_point(x, y);
+        add_point_to_polygon(&line, point);
+
+        if (p < 0) {
+            if (!swapped) {
+                x += sx;
+            } else {
+                y += sy;
+            }
+        } else {
+            x += sx;
+            y += sy;
+            p += 2 * abs(dx);
+        }
+        p += 2 * abs(dy);
+    }
+
+    return line;
+}

@@ -36,6 +36,9 @@ typedef struct Polygon {
 extern Polygon *new_polygon(void);
 extern void add_point_to_polygon(Polygon **pgn, Point *p);
 
+/* Get a list of points on the given line */
+extern Polygon *line_points(Point *a, Point *b);
+
 /* Initialise ncurses */
 extern void izobata_init(void);
 /* Close ncurses */
