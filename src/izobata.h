@@ -54,6 +54,8 @@ extern Polygon *polygon_union(Polygon *q, Polygon *t);
 extern void izobata_init(void);
 /* Close ncurses */
 extern void izobata_close(void);
+/* Clear both the screen and the render buffer */
+extern void clearscr(void);
 
 /* Add a point to the buffer */
 extern void add_point(Point *p);

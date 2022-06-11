@@ -186,3 +186,8 @@ Polygon *polygon_union(Polygon *q, Polygon *t)
     memcpy(pgn->points + q->len, t->points, t->len * sizeof(Point *));
     return pgn;
 }
+
+void clearscr(void)
+{
+    clear();
+}
