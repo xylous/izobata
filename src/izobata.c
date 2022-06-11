@@ -280,6 +280,30 @@ Polygon *circle(Point *c, int r)
     return circ;
 }
 
+Polygon *line_edges(Polygon *line)
+{
+    Polygon *edges = new_polygon();
+    Point *last = line->points[0];
+
+    /* The first point in the line is always an edge */
+    add_point_to_polygon(&edges, line->points[0]);
+    /* A point is an edge if there's a gap between it and the next one; but this
+     * also means the next one is an edge, too */
+    for (int i = 0; i < line->len - 1; i++) {
+        if (line->points[i+1]->x != line->points[i]->x + 1) {
+            if (line->points[i] != last) {
+                add_point_to_polygon(&edges, line->points[i]);
+            }
+            add_point_to_polygon(&edges, line->points[i+1]);
+            last = line->points[i+1];
+        }
+    }
+    /* The last point is always an edge */
+    add_point_to_polygon(&edges, line->points[line->len-1]);
+
+    return edges;
+}
+
 /* Implement scanline algorithm for filling in a polygon */
 Polygon *fill_polygon(Polygon *pgn)
 {
@@ -309,12 +333,23 @@ Polygon *fill_polygon(Polygon *pgn)
         Point *start = new_point(xmin, y);
         Point *end = new_point(xmax, y);
         Polygon *line = line_points(start, end);
-        Polygon *scanline = polygon_intersect(line, pgn);
+        Polygon *intersections = polygon_intersect(line, pgn);
+        Polygon *scanline = line_edges(intersections);
 
+        int parity = 1;
         for (int i = 0; i < scanline->len - 1; i++) {
-            for (int x = scanline->points[i]->x; x <= scanline->points[i+1]->x; x++) {
-                Point *p = new_point(x, y);
-                add_point_to_polygon(&filled, p);
+            /* Don't falsely switch parity on consecutive points */
+            if (scanline->points[i]->x + 1 == scanline->points[i+1]->x) {
+                parity = 1;
+            }
+            if (parity == 0) {
+                parity = 1;
+            } else {
+                for (int x = scanline->points[i]->x; x <= scanline->points[i+1]->x; x++) {
+                    Point *p = new_point(x, y);
+                    add_point_to_polygon(&filled, p);
+                }
+                parity = 0;
             }
         }
         /* Some edges might have a single point. Don't miss it */
