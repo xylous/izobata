@@ -316,7 +316,6 @@ Polygon *points_in_polygon(Polygon *pgn)
                 Point *p = new_point(x, y);
                 add_point_to_polygon(&filled, p);
             }
-            i++;
         }
     }
 
