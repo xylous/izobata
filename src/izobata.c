@@ -161,7 +161,8 @@ Polygon *polygon_intersect(Polygon *q, Polygon *t)
     Polygon *pgn = new_polygon();
     for (int i = 0; i < q->len; i++) {
         for (int j = 0; j < t->len; j++) {
-            if (q->points[i] == t->points[j]) {
+            if (q->points[i]->x == t->points[j]->x
+                    && q->points[i]->y == t->points[j]->y) {
                 add_point_to_polygon(&pgn, q->points[i]);
             }
         }
@@ -269,4 +270,47 @@ Polygon *circle(Point *c, int r)
     }
 
     return circ;
+}
+
+/* Implement scanline algorithm for filling in a polygon */
+Polygon *points_in_polygon(Polygon *pgn)
+{
+    Polygon *filled = new_polygon();
+
+    int ymin, ymax = 0;
+    int xmin, xmax = 0;
+
+    getmaxyx(stdscr, ymin, xmin);
+
+    for (int i = 0; i < pgn->len; i++) {
+        if (pgn->points[i]->y > ymax) {
+            ymax = pgn->points[i]->y;
+        } else if (ymin > pgn->points[i]->y) {
+            ymin = pgn->points[i]->y;
+        }
+        if (pgn->points[i]->x > xmax) {
+            xmax = pgn->points[i]->x;
+        } else if (xmin > pgn->points[i]->x) {
+            xmin = pgn->points[i]->x;
+        }
+    }
+
+    /* Scan every line and get the intersections. Add everything in-between
+     * them, including the points that were intersected. */
+    for (int y = ymax; y >= ymin; y--) {
+        Point *start = new_point(xmin, y);
+        Point *end = new_point(xmax, y);
+        Polygon *line = line_points(start, end);
+        Polygon *scanline = polygon_intersect(line, pgn);
+
+        for (int i = 0; i < scanline->len - 1; i++) {
+            for (int x = scanline->points[i]->x; x <= scanline->points[i+1]->x; x++) {
+                Point *p = new_point(x, y);
+                add_point_to_polygon(&filled, p);
+            }
+            i++;
+        }
+    }
+
+    return filled;
 }
