@@ -153,6 +153,17 @@ Polygon *polygon_sides(Polygon *pgn)
     return t;
 }
 
+/* Return 1 if the given point belongs to the polygon, and 0 if it doesn't */
+int point_belongs_to_polygon(Point *p, Polygon *pgn)
+{
+    for (int i = 0; i < pgn->len; i++) {
+        if (p->x == pgn->points[i]->x && p->y == pgn->points[i]->y) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 /**
  * Bruteforce. Not a good approach, but it works.
  */
@@ -160,11 +171,8 @@ Polygon *polygon_intersect(Polygon *q, Polygon *t)
 {
     Polygon *pgn = new_polygon();
     for (int i = 0; i < q->len; i++) {
-        for (int j = 0; j < t->len; j++) {
-            if (q->points[i]->x == t->points[j]->x
-                    && q->points[i]->y == t->points[j]->y) {
-                add_point_to_polygon(&pgn, q->points[i]);
-            }
+        if (point_belongs_to_polygon(q->points[i], t)) {
+            add_point_to_polygon(&pgn, q->points[i]);
         }
     }
     return pgn;
