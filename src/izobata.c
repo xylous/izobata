@@ -208,3 +208,14 @@ Polygon *rectangle(Point *tl_corner, int length, int height)
 
     return polygon_sides(rectangle);
 }
+
+Polygon *triangle(Point *p1, Point *p2, Point *p3)
+{
+    Polygon *triangle = new_polygon();
+
+    add_point_to_polygon(&triangle, p1);
+    add_point_to_polygon(&triangle, p2);
+    add_point_to_polygon(&triangle, p3);
+
+    return polygon_sides(triangle);
+}
