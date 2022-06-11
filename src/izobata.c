@@ -191,3 +191,20 @@ void clearscr(void)
 {
     clear();
 }
+
+Polygon *rectangle(Point *tl_corner, int length, int height)
+{
+    Polygon *rectangle = new_polygon();
+    int tl_x = tl_corner->x;
+    int tl_y = tl_corner->y;
+
+    Point *p1 = new_point(tl_x + length, tl_y);
+    Point *p2 = new_point(tl_x + length, tl_y + height);
+    Point *p3 = new_point(tl_x, tl_y + height);
+    add_point_to_polygon(&rectangle, tl_corner);
+    add_point_to_polygon(&rectangle, p1);
+    add_point_to_polygon(&rectangle, p2);
+    add_point_to_polygon(&rectangle, p3);
+
+    return polygon_sides(rectangle);
+}

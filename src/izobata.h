@@ -17,9 +17,7 @@
 #ifndef IZOBATA_H
 #define IZOBATA_H
 
-/**
- * Representation of a point at (x,y)
- */
+/* Representation of a point at (x,y) */
 typedef struct Point {
     int x;
     int y;
@@ -63,5 +61,11 @@ extern void add_point(Point *p);
 extern void point_info(Point *p);
 /* Put everything in the buffer on the screen */
 extern void output_all(void);
+
+/**
+ * Return a rectangle (including sides), knowing its top left corner, its length
+ * and its height
+ */
+extern Polygon *rectangle(Point *tl_corner, int length, int height);
 
 #endif
