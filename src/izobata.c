@@ -219,3 +219,54 @@ Polygon *triangle(Point *p1, Point *p2, Point *p3)
 
     return polygon_sides(triangle);
 }
+
+/* Brutely compute the eight next points in the outline of the circle */
+Polygon *circle_layer(Point *c, int x, int y)
+{
+    Polygon *layer = new_polygon();
+    Point *p1 = new_point(c->x + x, c->y + y);
+    Point *p2 = new_point(c->x - x, c->y + y);
+    Point *p3 = new_point(c->x + x, c->y - y);
+    Point *p4 = new_point(c->x - x, c->y - y);
+    Point *p5 = new_point(c->x + y, c->y + x);
+    Point *p6 = new_point(c->x - y, c->y + x);
+    Point *p7 = new_point(c->x + y, c->y - x);
+    Point *p8 = new_point(c->x - y, c->y - x);
+
+    add_point_to_polygon(&layer, p1);
+    add_point_to_polygon(&layer, p2);
+    add_point_to_polygon(&layer, p3);
+    add_point_to_polygon(&layer, p4);
+    add_point_to_polygon(&layer, p5);
+    add_point_to_polygon(&layer, p6);
+    add_point_to_polygon(&layer, p7);
+    add_point_to_polygon(&layer, p8);
+
+    return layer;
+}
+
+/* Unfortunately it doesn't look like a circle, because of the terminal width
+ * and height. */
+Polygon *circle(Point *c, int r)
+{
+    int d = 3 - 2 * r;
+    int x = 0;
+    int y = r;
+    Polygon *circ = new_polygon();
+
+    while (x <= y) {
+        Polygon *layer = circle_layer(c, x, y);
+        circ = polygon_union(circ, layer);
+
+        x++;
+
+        if (d > 0) {
+            y--;
+            d = d + 4 * (x - y) + 10;
+        } else {
+            d = d + 4 * x + 6;
+        }
+    }
+
+    return circ;
+}

@@ -70,4 +70,6 @@ extern Polygon *rectangle(Point *tl_corner, int length, int height);
 /* Return the outline of the triangle given by the points */
 extern Polygon *triangle(Point *p1, Point *p2, Point *p3);
 
+extern Polygon *circle(Point *centre, int radius);
+
 #endif
