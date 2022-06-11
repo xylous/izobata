@@ -121,7 +121,7 @@ Polygon *line_points(Point *a, Point *b)
         } else {
             x += sx;
             y += sy;
-            p += 2 * abs(dx);
+            p -= 2 * abs(dx);
         }
         p += 2 * abs(dy);
     }
