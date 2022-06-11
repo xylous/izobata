@@ -73,6 +73,6 @@ extern Polygon *triangle(Point *p1, Point *p2, Point *p3);
 extern Polygon *circle(Point *centre, int radius);
 
 /* Return the set of all points that are inside the polygon */
-extern Polygon *points_in_polygon(Polygon *pgn);
+extern Polygon *fill_polygon(Polygon *pgn);
 
 #endif

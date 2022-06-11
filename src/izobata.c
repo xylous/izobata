@@ -281,7 +281,7 @@ Polygon *circle(Point *c, int r)
 }
 
 /* Implement scanline algorithm for filling in a polygon */
-Polygon *points_in_polygon(Polygon *pgn)
+Polygon *fill_polygon(Polygon *pgn)
 {
     Polygon *filled = new_polygon();
 
