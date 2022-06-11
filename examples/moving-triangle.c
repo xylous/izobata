@@ -29,14 +29,11 @@ int main(void)
     Point *p1 = new_point(2, 4);
     Point *p2 = new_point(20, 10);
     Point *p3 = new_point(8, 29);
-    Polygon *pgn = new_polygon();
-    add_point_to_polygon(&pgn, p1);
-    add_point_to_polygon(&pgn, p2);
-    add_point_to_polygon(&pgn, p3);
 
     for (int i = 0; i < 38; i++) {
+        Polygon *tri = triangle(p1, p2, p3);
         clearscr();
-        draw_polygon(polygon_sides(pgn));
+        draw_polygon(tri);
         output_all();
         p1->x++;
         if (i % 2 == 0) {
