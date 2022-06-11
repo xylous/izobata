@@ -16,7 +16,7 @@ EXAMPLES_BIN_DIR 	:= bin
 EXAMPLES_SRC_FILES 	:= $(shell ls -I "*.h" examples)
 EXAMPLES_BINARIES 	:= $(addprefix $(EXAMPLES_BIN_DIR)/, $(EXAMPLES_SRC_FILES:.c=))
 
-all: library examples
+all: $(LIB_FILE) examples
 
 debug: CFLAGS += -g
 debug: all
@@ -27,7 +27,7 @@ $(EXAMPLES_BIN_DIR)/%: $(OBJECTS_DIR)/%.o
 	mkdir -p $(EXAMPLES_BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $< $(LD_FLAGS)
 
-library: $(LIB_OBJECTS)
+$(LIB_FILE): $(LIB_OBJECTS)
 	ar -cvq $(LIB_FILE) $(LIB_OBJECTS)
 
 $(OBJECTS_DIR)/%.o: %.c
