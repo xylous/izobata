@@ -23,7 +23,7 @@ int main(void)
     Point *tl = new_point(10, 10);
 
     Polygon *rect = rectangle(tl, 10, 5);
-    draw_polygon(rect);
+    draw_polygon(fill_polygon(rect));
 
     output_all();
     izobata_close();
