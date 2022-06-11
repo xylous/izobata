@@ -317,6 +317,11 @@ Polygon *points_in_polygon(Polygon *pgn)
                 add_point_to_polygon(&filled, p);
             }
         }
+        /* Some edges might have a single point. Don't miss it */
+        if (scanline->len == 1) {
+            Point *p = new_point(scanline->points[0]->x, y);
+            add_point_to_polygon(&filled, p);
+        }
     }
 
     return filled;
