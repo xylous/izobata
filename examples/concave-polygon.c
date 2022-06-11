@@ -20,22 +20,25 @@
 
 int main(void)
 {
-    Point *p1 = new_point(1, 1);
-    Point *p2 = new_point(1, 6);
-    Point *p3 = new_point(11, 6);
-    Point *p4 = new_point(6, 1);
-    Point *p5 = new_point(6, 4);
+    Point *p1 = new_point(2, 2);
+    Point *p2 = new_point(2, 12);
+    Point *p3 = new_point(22, 12);
+    Point *p4 = new_point(12, 2);
+    Point *p5 = new_point(12, 8);
+    Point *p6 = new_point(4, 2);
     Polygon *pgn = new_polygon();
     add_point_to_polygon(&pgn, p1);
     add_point_to_polygon(&pgn, p2);
     add_point_to_polygon(&pgn, p3);
     add_point_to_polygon(&pgn, p4);
     add_point_to_polygon(&pgn, p5);
+    add_point_to_polygon(&pgn, p6);
+    pgn = polygon_sides(pgn);
 
     izobata_init();
 
-    /*draw_polygon(polygon_sides(pgn));*/
-    draw_polygon(fill_polygon(pgn));
+    Polygon *filled = fill_polygon(pgn);
+    draw_polygon(filled);
     output_all();
 
     izobata_close();
