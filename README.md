@@ -19,6 +19,8 @@ algorithms and methods, but the way the platform itself works. A terminal is a
 - colour support. Some modern terminals can support 24 bit RGB, but not all.
     Thus, a limit of only 256 colours. Or worse: 16!
 
+To learn about the library interface, check the [API reference](./doc/API.md).
+
 ## Getting started
 
 ### Requirements
