@@ -36,12 +36,6 @@ Polygon *new_polygon(void)
     return pgn;
 }
 
-void point_info(Point *p)
-{
-    if (p)
-        printf("(x=%d,y=%d)\n", p->x, p->y);
-}
-
 void add_point_to_polygon(Polygon **pgn, Point *p)
 {
     int len = (*pgn)->len;
