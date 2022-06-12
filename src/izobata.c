@@ -20,6 +20,23 @@
 #include <ncurses.h>
 #include <math.h>
 
+void izobata_init(void)
+{
+    initscr();
+    noecho();
+}
+
+void izobata_close(void)
+{
+    getch();
+    endwin();
+}
+
+void clearscr(void)
+{
+    clear();
+}
+
 Point *new_point(int x, int y)
 {
     Point *v = calloc(1, sizeof(Point));
@@ -36,6 +53,14 @@ Polygon *new_polygon(void)
     return pgn;
 }
 
+Vector *new_vector(Point *from, Point *to)
+{
+    Vector *v = calloc(1, sizeof(Vector));
+    v->from = from;
+    v->to = to;
+    return v;
+}
+
 void add_point_to_polygon(Polygon **pgn, Point *p)
 {
     int len = (*pgn)->len;
@@ -50,22 +75,17 @@ void add_point_to_polygon(Polygon **pgn, Point *p)
     (*pgn)->len += 1;
 }
 
-void izobata_init(void)
-{
-    initscr();
-    noecho();
-}
-
-void izobata_close(void)
-{
-    getch();
-    endwin();
-}
-
 void add_point(Point *p)
 {
     move(p->y, p->x);
     printw("#");
+}
+
+void draw_polygon(Polygon *pgn)
+{
+    for (int i = 0; i < pgn->len; i++) {
+        add_point(pgn->points[i]);
+    }
 }
 
 void output_all(void)
@@ -122,13 +142,6 @@ Polygon *line_points(Point *a, Point *b)
     }
 
     return line;
-}
-
-void draw_polygon(Polygon *pgn)
-{
-    for (int i = 0; i < pgn->len; i++) {
-        add_point(pgn->points[i]);
-    }
 }
 
 Polygon *polygon_sides(Polygon *pgn)
@@ -189,11 +202,6 @@ Polygon *polygon_union(Polygon *q, Polygon *t)
     memcpy(pgn->points, q->points, q->len * sizeof(Point *));
     memcpy(pgn->points + q->len, t->points, t->len * sizeof(Point *));
     return pgn;
-}
-
-void clearscr(void)
-{
-    clear();
 }
 
 Polygon *rectangle(Point *tl_corner, int length, int height)
@@ -369,14 +377,6 @@ Polygon *translate_polygon(Polygon *pgn, int dx, int dy)
         add_point_to_polygon(&translated, translate_point(pgn->points[i], dx, dy));
     }
     return translated;
-}
-
-Vector *new_vector(Point *from, Point *to)
-{
-    Vector *v = calloc(1, sizeof(Vector));
-    v->from = from;
-    v->to = to;
-    return v;
 }
 
 Vector *rotate_vector(Vector *v, int alpha)
