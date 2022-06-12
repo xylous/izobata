@@ -30,15 +30,14 @@ int main(void)
     Polygon *tri = triangle(p1, p2, p3);
 
     draw_polygon(tri);
-    output_all();
+    render();
 
-    output_all();
     sleep(1);
     clearscr();
 
     Polygon *rotated = rotate_polygon(tri, p1, 180);
     draw_polygon(rotated);
-    output_all();
+    render();
 
     izobata_close();
     return 0;

@@ -34,7 +34,7 @@ int main(void)
         Polygon *tri = triangle(p1, p2, p3);
         clearscr();
         draw_polygon(tri);
-        output_all();
+        render();
         p1->x++;
         if (i % 2 == 0) {
             p1->y++;

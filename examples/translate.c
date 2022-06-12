@@ -27,13 +27,13 @@ int main(void)
     Polygon *rect = rectangle(tl, 3, 6);
 
     draw_polygon(rect);
-    output_all();
+    render();
 
     sleep(1);
 
     Polygon *translated = translate_polygon(rect, 10, -10);
     draw_polygon(translated);
-    output_all();
+    render();
 
     izobata_close();
     return 0;

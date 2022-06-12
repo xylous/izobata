@@ -25,7 +25,7 @@ int main(void)
     Polygon *rect = rectangle(tl, 10, 5);
     draw_polygon(fill_polygon(rect));
 
-    output_all();
+    render();
     izobata_close();
 
     return 0;

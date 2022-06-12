@@ -41,7 +41,7 @@ int main(void)
 
     Polygon *shape = polygon_union(polygon_sides(pgn2), polygon_sides(pgn1));
     draw_polygon(shape);
-    output_all();
+    render();
 
     izobata_close();
 

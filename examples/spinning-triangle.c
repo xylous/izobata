@@ -40,7 +40,7 @@ int main(void)
         Polygon *outline = polygon_sides(tri);
         clearscr();
         draw_polygon(outline);
-        output_all();
+        render();
         usleep(1000 * SLEEP_MILIS);
         tri = rotate_polygon(tri, p1, ROTATE_DEGREES);
     }

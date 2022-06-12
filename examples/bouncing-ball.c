@@ -41,7 +41,7 @@ int main(void)
 
         clearscr();
         draw_polygon(circ);
-        output_all();
+        render();
 
         /* Switch the direction if we collide with the edge */
         if (c->x == BALL_RADIUS || c->x == cols - BALL_RADIUS) {

@@ -50,12 +50,12 @@ extern Point *new_point(int x, int y);
 extern Polygon *new_polygon(void);
 extern Vector *new_vector(Point *from, Point *to);
 
-/* Add a point to the buffer */
-extern void add_point(Point *p);
-/* Add all points in the polygon to the render buffer */
+/* Add a point to the render buffer */
+extern void draw_point(Point *p);
+/* Add an entire polygon to the render buffer */
 extern void draw_polygon(Polygon *pgn);
-/* Put everything in the buffer on the screen */
-extern void output_all(void);
+/* Render everything in the buffer */
+extern void render(void);
 
 extern void add_point_to_polygon(Polygon **pgn, Point *p);
 

@@ -75,7 +75,7 @@ void add_point_to_polygon(Polygon **pgn, Point *p)
     (*pgn)->len += 1;
 }
 
-void add_point(Point *p)
+void draw_point(Point *p)
 {
     move(p->y, p->x);
     printw("#");
@@ -84,11 +84,11 @@ void add_point(Point *p)
 void draw_polygon(Polygon *pgn)
 {
     for (int i = 0; i < pgn->len; i++) {
-        add_point(pgn->points[i]);
+        draw_point(pgn->points[i]);
     }
 }
 
-void output_all(void)
+void render(void)
 {
     refresh();
 }

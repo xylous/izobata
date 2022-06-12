@@ -39,7 +39,7 @@ int main(void)
 
     Polygon *filled = fill_polygon(pgn);
     draw_polygon(filled);
-    output_all();
+    render();
 
     izobata_close();
 
