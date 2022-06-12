@@ -366,3 +366,12 @@ Point *translate_point(Point *p, int dx, int dy)
 {
     return new_point(p->x + dx, p->y + dy);
 }
+
+Polygon *translate_polygon(Polygon *pgn, int dx, int dy)
+{
+    Polygon *translated = new_polygon();
+    for (int i = 0; i < pgn->len; i++) {
+        add_point_to_polygon(&translated, translate_point(pgn->points[i], dx, dy));
+    }
+    return translated;
+}

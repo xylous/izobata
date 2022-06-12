@@ -77,5 +77,7 @@ extern Polygon *fill_polygon(Polygon *pgn);
 
 /* Move the given point by delta x and delta y */
 extern Point *translate_point(Point *p, int dx, int dy);
+/* Move an entire polygon by delta x and delta y */
+extern Polygon *translate_polygon(Polygon *pgn, int dx, int dy);
 
 #endif
