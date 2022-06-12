@@ -20,6 +20,22 @@
 #include <ncurses.h>
 #include <math.h>
 
+/**
+ * On a horizontal line, return only the edges, i.e. the points that are
+ * separated by one or more gaps. The first and last points are always edges.
+ *
+ * Used internally for filling in a polygon, with the scanline method
+ */
+Polygon *line_edges(Polygon *line);
+/**
+ * Brutely compute the eight next points in the outline of the circle
+ *
+ * Used internally for computing the outline of a circle
+ */
+Polygon *circle_layer(Point *c, int x, int y);
+/* Return 1 if the given point belongs to the polygon, and 0 if it doesn't */
+int point_belongs_to_polygon(Point *p, Polygon *pgn);
+
 void izobata_init(void)
 {
     initscr();
@@ -161,7 +177,6 @@ Polygon *polygon_sides(Polygon *pgn)
     return t;
 }
 
-/* Return 1 if the given point belongs to the polygon, and 0 if it doesn't */
 int point_belongs_to_polygon(Point *p, Polygon *pgn)
 {
     for (int i = 0; i < pgn->len; i++) {
