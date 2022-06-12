@@ -361,3 +361,8 @@ Polygon *fill_polygon(Polygon *pgn)
 
     return filled;
 }
+
+Point *translate_point(Point *p, int dx, int dy)
+{
+    return new_point(p->x + dx, p->y + dy);
+}

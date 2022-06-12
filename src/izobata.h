@@ -75,4 +75,7 @@ extern Polygon *circle(Point *centre, int radius);
 /* Return the set of all points that are inside the polygon */
 extern Polygon *fill_polygon(Polygon *pgn);
 
+/* Move the given point by delta x and delta y */
+extern Point *translate_point(Point *p, int dx, int dy);
+
 #endif
