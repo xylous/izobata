@@ -2,7 +2,7 @@ PROJECT_NAME 	:= izobata
 
 CC 			?= gcc
 CFLAGS 		:= -Wall -Wextra -Wpedantic -O3
-LD_FLAGS 	:= -lncurses -L. -lizobata
+LD_FLAGS 	:= -lm -lncurses -L. -lizobata
 
 VPATH 		:= src:examples:
 

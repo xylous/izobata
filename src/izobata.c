@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
+#include <math.h>
 
 Point *new_point(int x, int y)
 {
@@ -374,4 +375,12 @@ Polygon *translate_polygon(Polygon *pgn, int dx, int dy)
         add_point_to_polygon(&translated, translate_point(pgn->points[i], dx, dy));
     }
     return translated;
+}
+
+Vector *new_vector(Point *from, Point *to)
+{
+    Vector *v = calloc(1, sizeof(Vector));
+    v->from = from;
+    v->to = to;
+    return v;
 }

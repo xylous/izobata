@@ -80,4 +80,16 @@ extern Point *translate_point(Point *p, int dx, int dy);
 /* Move an entire polygon by delta x and delta y */
 extern Polygon *translate_polygon(Polygon *pgn, int dx, int dy);
 
+/**
+ * A Vector is represented as an origin point and a destination point. This is
+ * its direction; its magnitude is determined by the distance between these two
+ * points.
+ */
+typedef struct Vector {
+    Point *from;
+    Point *to;
+} Vector;
+
+extern Vector *new_vector(Point *from, Point *to);
+
 #endif
