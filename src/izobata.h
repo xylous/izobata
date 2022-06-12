@@ -92,4 +92,7 @@ typedef struct Vector {
 
 extern Vector *new_vector(Point *from, Point *to);
 
+/* Rotate a vector clockwise RELATIVE TO ITS ORIGIN POINT */
+extern Vector *rotate_vector(Vector *v, int alpha);
+
 #endif

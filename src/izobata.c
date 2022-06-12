@@ -384,3 +384,24 @@ Vector *new_vector(Point *from, Point *to)
     v->to = to;
     return v;
 }
+
+Vector *rotate_vector(Vector *v, int alpha)
+{
+    /* sin() and cos() assume the angle is in radians */
+    double pi = acos(-1);
+    double angle = (double) alpha / 180.0 * pi;
+
+    int dx = v->from->x;
+    int dy = v->from->y;
+    int x = v->to->x - dx;
+    int y = v->to->y - dy;
+
+    /* other than that, it's just maths */
+    int xnew = dx + x * cos(angle) - y * sin(angle);
+    int ynew = dy + x * sin(angle) + y * cos(angle);
+
+    Point *new = new_point(xnew, ynew);
+    Vector *nv = new_vector(v->from, new);
+
+    return nv;
+}
