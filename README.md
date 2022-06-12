@@ -24,11 +24,17 @@ points with the same depth on a map. Think: oceanology.
 
 ## Roadmap
 
-- [ ] draw individual vertexes
-- [ ] Bresenham algorithm for line rendering
-- [ ] draw a triangle
-- [ ] draw a polygon with N sides
-- [ ] draw a circle
+- [x] initialise and close (ncurses) session, + clear screen
+- [x] draw individual points
+- [x] implement Bresenham algorithm for line rendering
+- [x] create polygons with N sides
+- [x] provide shortcuts for triangles, rectangles, circles
+- [x] fill in polygons
+    - [x] convex
+    - [ ] concave
+    - [ ] self-intersecting
+- [x] translate points and polygons
+- [x] rotate shapes by a certain number of degrees
 
 ## Contributing
 
