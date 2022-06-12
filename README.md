@@ -1,10 +1,23 @@
 # izobata
 
 `izobata` is a library for rendering lines and polygons in a terminal, using
-ncurses.
+ncurses. The name comes from the French *isobathe*, a term used to denote lines
+that link points with the same depth on a map. Think: oceanology.
 
-The name comes from the French *isobathe*, a term used to denote lines that link
-points with the same depth on a map. Think: oceanology.
+Unfortunately, there are several limitations to the concept. The issue isn't the
+algorithms and methods, but the way the platform itself works. A terminal is a
+*very* limited device: it isn't, in any way, made for graphics-related stuff.
+
+- there are more columns than lines, and, similarly, the size of a line is
+    (usually) greater than that of a column by at least two times. Thus, the
+    line drawn between points (10,10) and (10,20) appears a lot longer than the
+    line drawn between points (10,10) and (20,10)
+- we can only draw on each cell, individually. This wouldn't be a problem if
+    there were more of them, but there's only a few. The only way to increase or
+    decrease the resolution would be to resize either the terminal window in
+    X11, either change the font size so that cells are smaller/bigger.
+- colour support. Some modern terminals can support 24 bit RGB, but not all.
+    Thus, a limit of only 256 colours. Or worse: 16!
 
 ## Getting started
 
