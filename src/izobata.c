@@ -33,8 +33,6 @@ Polygon *line_edges(Polygon *line);
  * Used internally for computing the outline of a circle
  */
 Polygon *circle_layer(Point *c, int x, int y);
-/* Return 1 if the given point belongs to the polygon, and 0 if it doesn't */
-int point_belongs_to_polygon(Point *p, Polygon *pgn);
 
 void izobata_init(void)
 {

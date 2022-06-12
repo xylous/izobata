@@ -50,6 +50,8 @@ extern Point *new_point(int x, int y);
 extern Polygon *new_polygon(void);
 extern Vector *new_vector(Point *from, Point *to);
 
+extern void add_point_to_polygon(Polygon **pgn, Point *p);
+
 /* Add a point to the render buffer */
 extern void draw_point(Point *p);
 /* Add an entire polygon to the render buffer */
@@ -57,14 +59,14 @@ extern void draw_polygon(Polygon *pgn);
 /* Render everything in the buffer */
 extern void render(void);
 
-extern void add_point_to_polygon(Polygon **pgn, Point *p);
-
 /* Get a list of points on the given line */
 extern Polygon *line_points(Point *a, Point *b);
 
 /* Link all points in a polygon, line-by-line */
 extern Polygon *polygon_sides(Polygon *pgn);
 
+/* Return 1 if the given point belongs to the polygon, and 0 if it doesn't */
+int point_belongs_to_polygon(Point *p, Polygon *pgn);
 /* Return the set of points that are common to both polygons */
 extern Polygon *polygon_intersect(Polygon *q, Polygon *t);
 /* Return all points in both polygons */
