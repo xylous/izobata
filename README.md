@@ -6,21 +6,51 @@ ncurses.
 The name comes from the French *isobathe*, a term used to denote lines that link
 points with the same depth on a map. Think: oceanology.
 
-<!--
 ## Getting started
 
 ### Requirements
 
-(What other software does this project depend on?)
+For building:
+
+- GNU Make
+- GCC
+
+For running:
+
+- ncurses
 
 ### Installation
 
-(How can anyone get this software running, provided they meet the requirements?)
+Right now you can only install it manually. I'll get to making a package for
+this library when it's in a more refined state.
 
-### Usage
+Get the repository on your local system, `cd` into it, and run `make library`:
 
-(How is this software used?)
--->
+```
+git clone https://github.com/xylous/izobata izobata
+cd izobata
+make library
+```
+
+If you want to look at programs using this libraries, check out the `examples/`
+directory. You can run `make examples` to build all of them. They're put into
+the `bin/` directory. Execute them to try them out!
+
+If you run `make` with no targets, it would build both the library and the
+examples.
+
+The library file, `libizobata.a`, is statically linked. For now, you'll have to
+copy both it and the header file (`src/izobata.h`) into your project, for
+example:
+
+```
+mkdir -p myproject/include
+cp /path/to/izobata/libizobata.a /path/to/izobata/src/izobata.h myproject/include
+```
+
+If you're in the project root directory, you'll have to compile with `gcc ...
+-L./include -lizobata`. Yes, it's fairly tedious to get it up and running, just
+because I haven't yet got to packaging it.
 
 ## Roadmap
 
