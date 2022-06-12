@@ -95,4 +95,7 @@ extern Vector *new_vector(Point *from, Point *to);
 /* Rotate a vector clockwise RELATIVE TO ITS ORIGIN POINT */
 extern Vector *rotate_vector(Vector *v, int alpha);
 
+/* Rotate a polygon around a pivot point */
+extern Polygon *rotate_polygon(Polygon *pgn, Point *pivot, int alpha);
+
 #endif

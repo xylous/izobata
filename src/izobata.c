@@ -405,3 +405,20 @@ Vector *rotate_vector(Vector *v, int alpha)
 
     return nv;
 }
+
+/**
+ * Draw a vector from the pivot point to every point in the polygon, rotate the
+ * vectors by alpha degrees and store the resulting points
+ */
+Polygon *rotate_polygon(Polygon *pgn, Point *pivot, int alpha)
+{
+    Polygon *rotated = new_polygon();
+
+    for (int i = 0; i < pgn->len; i++) {
+        Vector *v = new_vector(pivot, pgn->points[i]);
+        Vector *r = rotate_vector(v, alpha);
+        add_point_to_polygon(&rotated, r->to);
+    }
+
+    return rotated;
+}
