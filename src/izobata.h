@@ -17,8 +17,6 @@
 #ifndef IZOBATA_H
 #define IZOBATA_H
 
-#include <ncurses.h>
-
 #define COLOR_BLACK	    0
 #define COLOR_RED	    1
 #define COLOR_GREEN	    2
