@@ -28,6 +28,7 @@ extern void clearscr(void);
 typedef struct Point {
     int x;
     int y;
+    int fg_color;
 } Point;
 
 /* For simplicity: a polygon is just a set of points */

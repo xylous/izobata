@@ -20,6 +20,8 @@
 #include <ncurses.h>
 #include <math.h>
 
+#define     NO_COLOR    -1
+
 /**
  * On a horizontal line, return only the edges, i.e. the points that are
  * separated by one or more gaps. The first and last points are always edges.
@@ -37,6 +39,12 @@ Polygon *circle_layer(Point *c, int x, int y);
 void izobata_init(void)
 {
     initscr();
+    if (!has_colors()) {
+        printw("warning: no colours\n");
+        getch();
+    } else {
+        start_color();
+    }
     noecho();
 }
 
@@ -53,10 +61,12 @@ void clearscr(void)
 
 Point *new_point(int x, int y)
 {
-    Point *v = calloc(1, sizeof(Point));
-    v->x = x;
-    v->y = y;
-    return v;
+    Point *p = calloc(1, sizeof(Point));
+    p->x = x;
+    p->y = y;
+    p->fg_color = NO_COLOR;
+
+    return p;
 }
 
 Polygon *new_polygon(void)
@@ -92,7 +102,15 @@ void add_point_to_polygon(Polygon **pgn, Point *p)
 void draw_point(Point *p)
 {
     move(p->y, p->x);
+    /* Add colour only if it's not none */
+    if (p->fg_color != NO_COLOR) {
+        init_pair(1, p->fg_color, COLOR_BLACK);
+        attron(COLOR_PAIR(1));
+    }
     printw("#");
+    if (p->fg_color != NO_COLOR) {
+        attroff(COLOR_PAIR(1));
+    }
 }
 
 void draw_polygon(Polygon *pgn)
