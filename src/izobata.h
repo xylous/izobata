@@ -105,4 +105,6 @@ void set_polygon_colour(Polygon *pgn, color_t c);
 /* Return the maximum number of colors that the terminal supports */
 int max_colors(void);
 
+void set_point_repr(Point *p, char repr);
+
 #endif

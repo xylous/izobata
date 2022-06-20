@@ -101,6 +101,11 @@ void set_polygon_colour(Polygon *pgn, color_t c)
     }
 }
 
+void set_point_repr(Point *p, char repr)
+{
+    p->repr = repr;
+}
+
 void add_point_to_polygon(Polygon **pgn, Point *p)
 {
     int len = (*pgn)->len;
