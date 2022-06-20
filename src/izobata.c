@@ -20,8 +20,6 @@
 #include <ncurses.h>
 #include <math.h>
 
-#define     NO_COLOR    -1
-
 /**
  * On a horizontal line, return only the edges, i.e. the points that are
  * separated by one or more gaps. The first and last points are always edges.
@@ -64,7 +62,7 @@ Point *new_point(int x, int y)
     Point *p = calloc(1, sizeof(Point));
     p->x = x;
     p->y = y;
-    p->fg_color = NO_COLOR;
+    p->fg_color = COLOR_WHITE;
 
     return p;
 }
@@ -114,15 +112,10 @@ void add_point_to_polygon(Polygon **pgn, Point *p)
 void draw_point(Point *p)
 {
     move(p->y, p->x);
-    /* Add colour only if it's not none */
-    if (p->fg_color != NO_COLOR) {
-        init_pair(1, p->fg_color, COLOR_BLACK);
-        attron(COLOR_PAIR(1));
-    }
+    init_pair(1, p->fg_color, COLOR_BLACK);
+    attron(COLOR_PAIR(1));
     printw("#");
-    if (p->fg_color != NO_COLOR) {
-        attroff(COLOR_PAIR(1));
-    }
+    attroff(COLOR_PAIR(1));
 }
 
 void draw_polygon(Polygon *pgn)
