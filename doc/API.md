@@ -12,7 +12,7 @@ Sections in this document:
 - [Printing to the screen](#printing-to-the-screen)
 - [Lines and shapes](#lines-and-shapes)
 - [Polygon maths!](#polygon-maths)
-- [Colors](#colors)
+- [Colors and on-screen representations](#colors-and-on-screen-representations)
 
 <!--
 Note to future self: Markdown references can't contain punctuation
@@ -55,9 +55,6 @@ returns data, the program choosing how to use it.
 
 Since `ncurses` has a "render buffer" of sorts, which is then flushed to the
 screen by calling a function, izobata has the same features.
-
-Unfortunately, for the time, points don't have a colour. Instead, when you
-render anything to the screen, it prints a plain, monotone `#`.
 
 `void draw_point(Point *p)` - add a point to the render buffer
 
@@ -122,7 +119,7 @@ may be lost because of rounding.
 polygon around a pivot point, by `alpha` degrees. What's been said about the
 above function applies here, too.
 
-## Colors
+## Colors and on-screen representations
 
 Every point is rendered with a color (by default: 7, which is close to
 gray/white), which you can change.
@@ -135,3 +132,14 @@ no check to see if the given color is outside the maximum.
 
 `void set_polygon_color(Polygon *pgn, color_t c)` is also self explanatory, but
 on a larger scale (pun very much intended).
+
+Moreover, each point has a `repr` (short for representation), which is the
+character that gets printed on-screen when the point is drawn. The default for
+all points is `#`, although you may change it:
+
+`void set_point_repr(Point *p, char repr)` - for a single point
+
+`void set_polygon_repr(Polygon *pgn, char repr)` - for an entire polygon
+
+Note that any character in the ASCII table would technically work as a point
+representation.
