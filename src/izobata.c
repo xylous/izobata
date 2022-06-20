@@ -28,6 +28,7 @@
  * Used internally for filling in a polygon, with the scanline method
  */
 Polygon *line_edges(Polygon *line);
+
 /**
  * Brutely compute the eight next points in the outline of the circle
  *
@@ -40,6 +41,9 @@ Polygon *circle_layer(Point *c, int x, int y);
  * otherwise
  */
 int x_adjacent_points(Point *p, Point *q);
+
+/* Return 1 if e1->x > e2->x, -1 if the inverse is true, or 0 if they're equal */
+int compare_points_x(const void *e1, const void *e2);
 
 void izobata_init(void)
 {
@@ -358,14 +362,33 @@ int x_adjacent_points(Point *p, Point *q)
         return 0;
 }
 
+int compare_points_x(const void *e1, const void *e2)
+{
+    Point *p = (Point *)e1;
+    Point *q = (Point *)e2;
+    if (p->x > q->x) {
+        return 1;
+    } else {
+        return -1;
+    }
+    return 0;
+}
+
 Polygon *line_edges(Polygon *line)
 {
     Polygon *edges = new_polygon();
 
     /* The first point in the line is always an edge */
     add_point_to_polygon(&edges, line->points[0]);
-    /* A point is an edge if there's a gap between it and the next one; but this
-     * also means the next one is an edge, too */
+
+    /*
+     * Practicallly, we only look at the points on the line that are between the
+     * two outermost bounds.
+     *
+     * For any given point we look at: if it's adjacent to the next point, then
+     * it's definitely not an edge point, unless it's also not adjacent to the
+     * previous point
+     */
     for (int i = 1; i < line->len - 1; i++) {
         Point *current = line->points[i];
         Point *next = line->points[i+1];
@@ -380,20 +403,16 @@ Polygon *line_edges(Polygon *line)
     /* The last point is always an edge */
     add_point_to_polygon(&edges, line->points[line->len-1]);
 
-    /* If this is true then we know we have a concave polygon. To form pairs,
-     * add the middle point again (naïve solution) */
-    if (edges->len % 2 == 1) {
-        Polygon *tmp = new_polygon();
+    /* IF we have an odd number of points we're dealing with a concave polygon.
+     * In that case, add the middle point again, but this is a very naïve
+     * bodge, and it doesn't really work */
+    if (edges->len % 2 == 1 && edges->len > 1) {
         int mid = edges->len / 2;
-        for (int i = 0; i < edges->len; i++) {
-            Point *p = edges->points[i];
-            add_point_to_polygon(&tmp, p);
-            if (i == mid) {
-                add_point_to_polygon(&tmp, p);
-            }
-        }
-        edges = tmp;
+        add_point_to_polygon(&edges, edges->points[mid]);
     }
+
+    /* Sort all points by their X coordinate */
+    qsort(edges->points, edges->len, sizeof(Point*), compare_points_x);
 
     return edges;
 }
