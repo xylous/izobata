@@ -15,6 +15,7 @@
  */
 
 #include "izobata.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
@@ -33,6 +34,12 @@ Polygon *line_edges(Polygon *line);
  * Used internally for computing the outline of a circle
  */
 Polygon *circle_layer(Point *c, int x, int y);
+
+/**
+ * True (1) if the points are next to each other on the X axis, false (0)
+ * otherwise
+ */
+int x_adjacent_points(Point *p, Point *q);
 
 void izobata_init(void)
 {
@@ -343,26 +350,50 @@ Polygon *circle(Point *c, int r)
     return circ;
 }
 
+int x_adjacent_points(Point *p, Point *q)
+{
+    if (abs(p->x - q->x) == 1)
+        return 1;
+    else
+        return 0;
+}
+
 Polygon *line_edges(Polygon *line)
 {
     Polygon *edges = new_polygon();
-    Point *last = line->points[0];
 
     /* The first point in the line is always an edge */
     add_point_to_polygon(&edges, line->points[0]);
     /* A point is an edge if there's a gap between it and the next one; but this
      * also means the next one is an edge, too */
-    for (int i = 0; i < line->len - 1; i++) {
-        if (line->points[i+1]->x != line->points[i]->x + 1) {
-            if (line->points[i] != last) {
-                add_point_to_polygon(&edges, line->points[i]);
-            }
-            add_point_to_polygon(&edges, line->points[i+1]);
-            last = line->points[i+1];
+    for (int i = 1; i < line->len - 1; i++) {
+        Point *current = line->points[i];
+        Point *next = line->points[i+1];
+        Point *prev = line->points[i-1];
+        if (!x_adjacent_points(current, next)) {
+            add_point_to_polygon(&edges, current);
+        } else if (i == line->len - 2 && !x_adjacent_points(current, prev)){
+            add_point_to_polygon(&edges, current);
         }
     }
+
     /* The last point is always an edge */
     add_point_to_polygon(&edges, line->points[line->len-1]);
+
+    /* If this is true then we know we have a concave polygon. To form pairs,
+     * add the middle point again (naïve solution) */
+    if (edges->len % 2 == 1) {
+        Polygon *tmp = new_polygon();
+        int mid = edges->len / 2;
+        for (int i = 0; i < edges->len; i++) {
+            Point *p = edges->points[i];
+            add_point_to_polygon(&tmp, p);
+            if (i == mid) {
+                add_point_to_polygon(&tmp, p);
+            }
+        }
+        edges = tmp;
+    }
 
     return edges;
 }
@@ -399,26 +430,15 @@ Polygon *fill_polygon(Polygon *pgn)
         Polygon *intersections = polygon_intersect(line, pgn);
         Polygon *scanline = line_edges(intersections);
 
-        int parity = 1;
-        for (int i = 0; i < scanline->len - 1; i++) {
-            /* Don't falsely switch parity on consecutive points */
-            if (scanline->points[i]->x + 1 == scanline->points[i+1]->x) {
-                parity = 1;
+        /* Go through all points on the scanline pair-by-pair, adding all points
+         * on the line uniting the pair */
+        for (int i = 0; i < scanline->len - 1; i+=2) {
+            int min_line_x = scanline->points[i]->x;
+            int max_line_x = scanline->points[i+1]->x;
+            for (int x = min_line_x; x <= max_line_x; x++) {
+                Point *p = new_point(x, y);
+                add_point_to_polygon(&filled, p);
             }
-            if (parity == 0) {
-                parity = 1;
-            } else {
-                for (int x = scanline->points[i]->x; x <= scanline->points[i+1]->x; x++) {
-                    Point *p = new_point(x, y);
-                    add_point_to_polygon(&filled, p);
-                }
-                parity = 0;
-            }
-        }
-        /* Some edges might have a single point. Don't miss it */
-        if (scanline->len == 1) {
-            Point *p = new_point(scanline->points[0]->x, y);
-            add_point_to_polygon(&filled, p);
         }
     }
 
