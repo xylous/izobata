@@ -71,8 +71,8 @@ because I haven't yet got to packaging it.
 
 - [x] initialise and close (ncurses) session, + clear screen
 - [x] draw individual points
-    - [ ] with colour
-    - [ ] with custom character
+    - [x] with colour
+    - [x] with custom character
 - [x] implement Bresenham algorithm for line rendering
 - [x] create polygons with N sides
 - [x] provide shortcuts for triangles, rectangles, circles

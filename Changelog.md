@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.0 - 2022-06-20
+
+- draw every point with a color (white by default)
+- add functions for handling color-related stuff
+- draw every point on-screen with a certain character (`#` by default)
+- add functions for setting point character representations
+- add `terminal_size()` function for returning number of lines and columns
+- add examples using color functions
+- add example using repr functions
+
 ## v0.1.0 - 2022-06-12
 
 - add Makefile
