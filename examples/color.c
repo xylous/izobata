@@ -21,6 +21,8 @@
 
 int main(void)
 {
+    color_t cyan = 6;
+    color_t red = 1;
     izobata_init();
 
     Point *p1 = new_point(20, 30);
@@ -34,13 +36,13 @@ int main(void)
 
     sleep(1);
 
-    set_polygon_colour(filled, COLOR_CYAN);
+    set_polygon_colour(filled, cyan);
     draw_polygon(filled);
     render();
 
     sleep(1);
 
-    set_polygon_colour(filled, COLOR_RED);
+    set_polygon_colour(filled, red);
     draw_polygon(filled);
     render();
 
