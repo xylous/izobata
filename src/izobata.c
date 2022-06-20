@@ -83,6 +83,11 @@ Vector *new_vector(Point *from, Point *to)
     return v;
 }
 
+int max_colors(void)
+{
+    return COLORS;
+}
+
 void set_point_colour(Point *p, int color)
 {
     p->fg_color = color;

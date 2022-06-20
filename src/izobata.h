@@ -108,4 +108,7 @@ extern Polygon *rotate_polygon(Polygon *pgn, Point *pivot, int alpha);
 void set_point_colour(Point *p, int color);
 void set_polygon_colour(Polygon *pgn, int color);
 
+/* Return the maximum number of colors that the terminal supports */
+int max_colors(void);
+
 #endif
