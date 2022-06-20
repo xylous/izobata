@@ -70,7 +70,7 @@ extern Polygon *line_points(Point *a, Point *b);
 extern Polygon *polygon_sides(Polygon *pgn);
 
 /* Return 1 if the given point belongs to the polygon, and 0 if it doesn't */
-int point_belongs_to_polygon(Point *p, Polygon *pgn);
+extern int point_belongs_to_polygon(Point *p, Polygon *pgn);
 /* Return the set of points that are common to both polygons */
 extern Polygon *polygon_intersect(Polygon *q, Polygon *t);
 /* Return all points in both polygons */
@@ -99,13 +99,13 @@ extern Vector *rotate_vector(Vector *v, int alpha);
 extern Polygon *rotate_polygon(Polygon *pgn, Point *pivot, int alpha);
 
 /* Colour-related */
-void set_point_colour(Point *p, color_t c);
-void set_polygon_colour(Polygon *pgn, color_t c);
+extern void set_point_colour(Point *p, color_t c);
+extern void set_polygon_colour(Polygon *pgn, color_t c);
 
 /* Return the maximum number of colors that the terminal supports */
-int max_colors(void);
+extern int max_colors(void);
 
-void set_point_repr(Point *p, char repr);
-void set_polygon_repr(Polygon *pgn, char repr);
+extern void set_point_repr(Point *p, char repr);
+extern void set_polygon_repr(Polygon *pgn, char repr);
 
 #endif
