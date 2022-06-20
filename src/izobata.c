@@ -90,6 +90,13 @@ void set_point_colour(Point *p, int color)
     p->fg_color = color;
 }
 
+void set_polygon_colour(Polygon *pgn, int color)
+{
+    for (int i = 0; i < pgn->len; i++) {
+        set_point_colour(pgn->points[i], color);
+    }
+}
+
 void add_point_to_polygon(Polygon **pgn, Point *p)
 {
     int len = (*pgn)->len;

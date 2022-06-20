@@ -97,5 +97,6 @@ extern Polygon *rotate_polygon(Polygon *pgn, Point *pivot, int alpha);
 
 /* Colour-related */
 void set_point_colour(Point *p, int color);
+void set_polygon_colour(Polygon *pgn, int color);
 
 #endif
