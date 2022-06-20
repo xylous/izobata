@@ -5,6 +5,19 @@ If you want to learn how they're used in practice, check the source files in the
 `examples/` directory at the root of this project, e.g.
 [rectangle.c](../examples/rectangle.c).
 
+Sections in this document:
+
+- [Initialisation](#initialisation)
+- [Data types](#data-types)
+- [Printing to the screen](#printing-to-the-screen)
+- [Lines and shapes](#lines-and-shapes)
+- [Polygon maths!](#polygon-maths)
+- [Colors](#colors)
+
+<!--
+Note to future self: Markdown references can't contain punctuation
+-->
+
 ## Initialisation
 
 Every app has to start and has to end at some point. `izobata_init()` and
