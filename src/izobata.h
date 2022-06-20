@@ -17,14 +17,7 @@
 #ifndef IZOBATA_H
 #define IZOBATA_H
 
-#define COLOR_BLACK	    0
-#define COLOR_RED	    1
-#define COLOR_GREEN	    2
-#define COLOR_YELLOW    3
-#define COLOR_BLUE	    4
-#define COLOR_MAGENTA   5
-#define COLOR_CYAN	    6
-#define COLOR_WHITE	    7
+typedef int color_t;
 
 /* Initialise ncurses */
 extern void izobata_init(void);
@@ -37,7 +30,7 @@ extern void clearscr(void);
 typedef struct Point {
     int x;
     int y;
-    int fg_color;
+    color_t fg_color;
 } Point;
 
 /* For simplicity: a polygon is just a set of points */
