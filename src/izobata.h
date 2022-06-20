@@ -95,4 +95,7 @@ extern Vector *rotate_vector(Vector *v, int alpha);
 /* Rotate a polygon around a pivot point */
 extern Polygon *rotate_polygon(Polygon *pgn, Point *pivot, int alpha);
 
+/* Colour-related */
+void set_point_colour(Point *p, int color);
+
 #endif

@@ -85,6 +85,11 @@ Vector *new_vector(Point *from, Point *to)
     return v;
 }
 
+void set_point_colour(Point *p, int color)
+{
+    p->fg_color = color;
+}
+
 void add_point_to_polygon(Polygon **pgn, Point *p)
 {
     int len = (*pgn)->len;
