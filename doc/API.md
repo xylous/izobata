@@ -28,6 +28,9 @@ is known, but also its magnitude, expressed as the length of the line segment
 between the points. Think of it this way: were the vector applied to the origin,
 the result would be the destination point.
 
+`typedef int color_t`. Yes, every color data type is just an int behind the
+scenes, but, for clarity, a typedef is used.
+
 ## Printing to the screen
 
 You have to initialise izobata before printing anything. Otherwise it won't
@@ -105,3 +108,17 @@ may be lost because of rounding.
 `Polygon *rotate_polygon(Polygon *pgn, Point *pivot, int alpha)` - rotate a
 polygon around a pivot point, by `alpha` degrees. What's been said about the
 above function applies here, too.
+
+## Colors
+
+Every point is rendered with a color (by default: 7, which is close to
+gray/white), which you can change.
+
+`int max_colors()` returns the number of maximum colors that your terminal
+supports; using colors outside of that range is undefined behavior
+
+`void set_point_color(Point *p, color_t c)` is self explanatory. Note that there's
+no check to see if the given color is outside the maximum.
+
+`void set_polygon_color(Polygon *pgn, color_t c)` is also self explanatory, but
+on a larger scale (pun very much intended).
