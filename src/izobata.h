@@ -106,5 +106,6 @@ void set_polygon_colour(Polygon *pgn, color_t c);
 int max_colors(void);
 
 void set_point_repr(Point *p, char repr);
+void set_polygon_repr(Polygon *pgn, char repr);
 
 #endif

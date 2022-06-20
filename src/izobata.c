@@ -106,6 +106,13 @@ void set_point_repr(Point *p, char repr)
     p->repr = repr;
 }
 
+void set_polygon_repr(Polygon *pgn, char repr)
+{
+    for (int i = 0; i < pgn->len; i++) {
+        set_point_repr(pgn->points[i], repr);
+    }
+}
+
 void add_point_to_polygon(Polygon **pgn, Point *p)
 {
     int len = (*pgn)->len;
