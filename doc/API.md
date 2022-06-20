@@ -64,6 +64,10 @@ screen by calling a function, izobata has the same features.
 
 `void clearscr(void)` - clear both the render buffer and the screen
 
+If you want to find the maximum size of the terminal *in terms of lines and
+columns*, use the `void terminal_size(int *x, int *y)` function, which puts the
+number of maximum columns into `x` and the number of maximum lines into `y`.
+
 ## Lines and shapes
 
 You won't hardcode all of a polygon's points, it's too tedious. Instead, it's
