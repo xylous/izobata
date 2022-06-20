@@ -36,13 +36,13 @@ int main(void)
 
     sleep(1);
 
-    set_polygon_colour(filled, cyan);
+    set_polygon_color(filled, cyan);
     draw_polygon(filled);
     render();
 
     sleep(1);
 
-    set_polygon_colour(filled, red);
+    set_polygon_color(filled, red);
     draw_polygon(filled);
     render();
 

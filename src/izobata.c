@@ -89,15 +89,15 @@ int max_colors(void)
     return COLORS;
 }
 
-void set_point_colour(Point *p, color_t c)
+void set_point_color(Point *p, color_t c)
 {
     p->fg_color = c;
 }
 
-void set_polygon_colour(Polygon *pgn, color_t c)
+void set_polygon_color(Polygon *pgn, color_t c)
 {
     for (int i = 0; i < pgn->len; i++) {
-        set_point_colour(pgn->points[i], c);
+        set_point_color(pgn->points[i], c);
     }
 }
 

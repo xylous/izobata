@@ -99,8 +99,8 @@ extern Vector *rotate_vector(Vector *v, int alpha);
 extern Polygon *rotate_polygon(Polygon *pgn, Point *pivot, int alpha);
 
 /* Colour-related */
-extern void set_point_colour(Point *p, color_t c);
-extern void set_polygon_colour(Polygon *pgn, color_t c);
+extern void set_point_color(Point *p, color_t c);
+extern void set_polygon_color(Polygon *pgn, color_t c);
 
 /* Return the maximum number of colors that the terminal supports */
 extern int max_colors(void);

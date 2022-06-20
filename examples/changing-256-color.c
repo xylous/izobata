@@ -33,7 +33,7 @@ int main(void)
 
     for (int color = 0; color < 256; color++) {
         clearscr();
-        set_polygon_colour(rect, color);
+        set_polygon_color(rect, color);
         draw_polygon(rect);
         render();
         usleep(1000 * 100);
