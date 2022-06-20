@@ -30,6 +30,7 @@ extern void clearscr(void);
 typedef struct Point {
     int x;
     int y;
+    char repr; /* representation character */
     color_t fg_color;
 } Point;
 

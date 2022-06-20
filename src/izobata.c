@@ -63,6 +63,7 @@ Point *new_point(int x, int y)
     p->x = x;
     p->y = y;
     p->fg_color = COLOR_WHITE;
+    p->repr = '#';
 
     return p;
 }
@@ -119,7 +120,7 @@ void draw_point(Point *p)
     move(p->y, p->x);
     init_pair(1, p->fg_color, COLOR_BLACK);
     attron(COLOR_PAIR(1));
-    printw("#");
+    printw("%c", p->repr);
     attroff(COLOR_PAIR(1));
 }
 
