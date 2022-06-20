@@ -108,4 +108,7 @@ extern int max_colors(void);
 extern void set_point_repr(Point *p, char repr);
 extern void set_polygon_repr(Polygon *pgn, char repr);
 
+/* Put the terminal max X and Y inside the given variables x and y */
+extern void terminal_size(int *y, int *x);
+
 #endif

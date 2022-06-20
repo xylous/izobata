@@ -57,6 +57,17 @@ void clearscr(void)
     clear();
 }
 
+int max_colors(void)
+{
+    return COLORS;
+}
+
+void terminal_size(int *x, int *y)
+{
+    *y = LINES;
+    *x = COLS;
+}
+
 Point *new_point(int x, int y)
 {
     Point *p = calloc(1, sizeof(Point));
@@ -82,11 +93,6 @@ Vector *new_vector(Point *from, Point *to)
     v->from = from;
     v->to = to;
     return v;
-}
-
-int max_colors(void)
-{
-    return COLORS;
 }
 
 void set_point_color(Point *p, color_t c)
